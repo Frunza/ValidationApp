@@ -1,0 +1,24 @@
+apiVersion:- apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: validationapp
+  name: validationapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: validationapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: validationapp
+    spec:
+      containers:
+      - image: none
+        name: none
+        resources: {}
+status: {}
