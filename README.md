@@ -63,7 +63,7 @@ Build the docker image by running the following script
 sh scripts/docker/build_docker_image.sh
 ```
 
-Look for your docker image by running the following command
+Look for your docker image by running the following command (note size differences between images: "python:3.9-alpine" and "python:3.9")
 
 ```
 docker images | grep "validation_server_app"
