@@ -158,6 +158,27 @@ sh scripts/server/validate_correct_yaml.sh
 sh scripts/server/validate_incorrect_yaml.sh
 ```
 
+# Features
 
+##### Probes
 
+An easy way to test the effectivness of the probes is to change the port number, delete the deployment with the following command
 
+```
+kubectl delete deploy validationapp -n development
+```
+
+and apply it again with the following script
+
+```
+sh scripts/k8s/apply_validationapp.sh
+```
+
+If the liveness probe is changed to fail, you will notice that the restarts count of the pods is continously increasing because the pods are continously restarted due to the liveness fail check.
+If the readiness probe is changed to fail, you will notice that the ready status of the pods is 0 because the readiness check is failing.
+
+You can obtain detailed information about the probes of a pod with the following command
+
+```
+kubectl describe pods *pod_name* -n development
+```
