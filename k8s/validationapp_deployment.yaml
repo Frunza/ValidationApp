@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - image: frunzahincu/validation_app
-        name: validation-app
+        name: validationapp
         readinessProbe:
           httpGet:
             path: /
@@ -30,3 +30,10 @@ spec:
             port: 5555
           initialDelaySeconds: 10
           periodSeconds: 5
+        resources:
+          requests:
+            memory: "20Mi"
+            cpu: 0.2
+          limits:
+            memory: "30Mi"
+            cpu: 0.3
