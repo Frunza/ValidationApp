@@ -158,7 +158,7 @@ sh scripts/server/validate_correct_yaml.sh
 sh scripts/server/validate_incorrect_yaml.sh
 ```
 
-# Features
+# Miscellaneous
 
 ##### Probes
 
@@ -182,3 +182,33 @@ You can obtain detailed information about the probes of a pod with the following
 ```
 kubectl describe pods *pod_name* -n development
 ```
+
+##### Ingress
+
+Since k8s runs in kind, the official guide should be followed at https://kind.sigs.k8s.io/docs/user/ingress/
+
+##### Load balancer
+
+Since k8s runs in kind, the official guide should be followed at https://kind.sigs.k8s.io/docs/user/loadbalancer/
+
+##### Horizontal pod autoscaller
+
+For setting up the horizontal pod autoscaler, it is important to configure requests and limits for the pod containers. You can start a horizontal pod autoscaller with the following command
+
+```
+kubectl apply -f k8s/horizontalpodautoscaler.yaml
+```
+
+To retrieve information about it run the following command
+```
+kubectl get hpa -n development
+```
+
+Note that the utilization of the target has some unknown information out of the value that in configure in the horizontal pod autoscaller. This happens because a metrics server has to be set up also. For detailed infomration about a full guide on how to set up a metric server consult the official k8s documentation at https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+
+##### Cluster autoscaler
+
+
+
+
+
