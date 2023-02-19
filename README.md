@@ -103,3 +103,23 @@ Make sure that the application container was removed successfully by running the
 ```
 docker ps --filter ancestor="validation_server_app"
 ```
+
+### Application in k8s
+
+Running application in k8s.
+
+##### Preparation
+
+The first step is to upload the docker image for k8s usage. Dockerhub can be used for this.
+
+Tag the docker image by running the following script
+
+```
+sh scripts/docker/tag_docker_image.sh
+```
+
+Assuming you are logged in docker, run the following script to push the docker image to dockerhub
+
+```
+sh scripts/docker/push_docker_image.sh
+```
