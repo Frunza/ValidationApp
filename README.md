@@ -208,7 +208,9 @@ Note that the utilization of the target has some unknown information out of the 
 
 ##### Cluster autoscaler
 
+There is official documentation about setting up cluster autoscaler for each public cloud provider. For example
+- aws: https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html
+- azure: https://learn.microsoft.com/en-us/azure/aks/cluster-autoscaler
+- gcd: https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler
 
-
-
-
+For on-premise solutions more complex logic has to implemented to scale the cluster and add/remove nodes when necessary.
