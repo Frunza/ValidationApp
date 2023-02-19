@@ -5,6 +5,7 @@ App validates yaml.
 
 - python3
 - kubectl
+- [kind](https://kind.sigs.k8s.io/)
 
 # Initializing the project
 
@@ -92,7 +93,7 @@ sh scripts/server/validate_incorrect_yaml.sh
 
 ##### Cleaning up
 
-Delet the running container with the following script
+Delete the running container with the following script
 
 ```
 sh scripts/docker/stop_and_remove_docker_container.sh
@@ -118,8 +119,45 @@ Tag the docker image by running the following script
 sh scripts/docker/tag_docker_image.sh
 ```
 
-Assuming you are logged in docker, run the following script to push the docker image to dockerhub
+Assuming you are logged in dockerhub, run the following script to push the docker image to dockerhub
 
 ```
 sh scripts/docker/push_docker_image.sh
 ```
+
+Create a kind cluster with the following script
+
+```
+sh scripts/k8s/create_cluster.sh
+```
+
+Add namespacs to the cluster with the following script
+
+```
+sh scripts/k8s/apply_namespaces.sh
+```
+
+Add the application deployment with the following script
+
+```
+sh scripts/k8s/apply_validationapp.sh
+```
+
+To access the deployment outside the cluster an ingress or load balancer can be used. Kind has guides for both. Just for testing the app, port forwarding also works by running the following command
+
+```
+kubectl port-forward deployment/validationapp 5555:5555 -n development &
+```
+
+##### Testing
+
+With port forwarding enabled, the exact same testing routine can be reused. Run the following scripts with valid and invalid files and check the server responses
+
+```
+sh scripts/server/validate_correct_yaml.sh
+sh scripts/server/validate_incorrect_yaml.sh
+```
+
+
+
+
