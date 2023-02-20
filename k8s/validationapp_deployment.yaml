@@ -43,3 +43,10 @@ spec:
             configMapKeyRef:
               name: validationapp-configmap
               key: test_config
+        volumeMounts:
+        - name: data
+          mountPath: /tmp
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: validationapp-volume-claim
