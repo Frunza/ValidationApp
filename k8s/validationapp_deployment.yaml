@@ -37,3 +37,9 @@ spec:
           limits:
             memory: "30Mi"
             cpu: 0.3
+        env:
+        - name: VALIDATIONAPP_TEST
+          valueFrom:
+            configMapKeyRef:
+              name: validationapp-configmap
+              key: test_config
