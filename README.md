@@ -148,10 +148,15 @@ Add the configmap with the following script
 sh scripts/k8s/apply_configmap.sh
 ```
 
+Add the veolume with the following script
+```
+sh scripts/k8s/apply_volumes.sh
+```
+
 To access the deployment outside the cluster an ingress or load balancer can be used. Kind has guides for both. Just for testing the app, port forwarding also works by running the following command
 
 ```
-kubectl port-forward deployment/validationapp 5555:5555 -n development &
+kubectl port-forward deployment/validationapp 5555:5555 -n development
 ```
 
 ##### Testing
@@ -191,13 +196,30 @@ kubectl describe pods *pod_name* -n development
 ##### Configmap
 
 The applicaton also has a landing page under "/", where some text and the value of the VALIDATIONAPP_TEST environment variable is present.
-A configmap can be used to inject that environment variable in the container. Just go throught he preparation section of "Application in k8s" and paste the following in your browser
+A configmap can be used to inject that environment variable in the container. Just go throught the preparation section of "Application in k8s" and paste the following in your browser
 
 ```
 http://localhost:5555/
 ```
 
 You will notice that the environment variable value from the configmap is displayed.
+
+##### Volumes
+
+The applicaton also has a landing page under "/", where a textfile is also created in the "/tmp" path.
+Local volume is used for the container. Just go throught the preparation section of "Application in k8s" and paste the following in your browser
+
+```
+http://localhost:5555/
+```
+
+To check whether the file was actually created, you can list the content of the path where you expect the file to be. To do so execute the following command
+
+```
+kubectl exec *podName- -n development --container validationapp -- ls /tmp
+```
+
+The file that the server created should be printed out. If it is not there, you might need to check the other pods as well.
 
 ##### Ingress
 
