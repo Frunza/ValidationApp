@@ -143,6 +143,11 @@ Add the application deployment with the following script
 sh scripts/k8s/apply_validationapp.sh
 ```
 
+Add the configmap with the following script
+```
+sh scripts/k8s/apply_configmap.sh
+```
+
 To access the deployment outside the cluster an ingress or load balancer can be used. Kind has guides for both. Just for testing the app, port forwarding also works by running the following command
 
 ```
@@ -182,6 +187,17 @@ You can obtain detailed information about the probes of a pod with the following
 ```
 kubectl describe pods *pod_name* -n development
 ```
+
+##### Configmap
+
+The applicaton also has a landing page under "/", where some text and the value of the VALIDATIONAPP_TEST environment variable is present.
+A configmap can be used to inject that environment variable in the container. Just go throught he preparation section of "Application in k8s" and paste the following in your browser
+
+```
+http://localhost:5555/
+```
+
+You will notice that the environment variable value from the configmap is displayed.
 
 ##### Ingress
 
