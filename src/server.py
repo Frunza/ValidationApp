@@ -7,6 +7,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
+    path = os.path.join("/tmp", "testfile")
+    with open(path, "w") as file:
+        file.write("Test text")
+        file.close
     result = 'Validation app. Use the validate-yaml endpont to validate that the request body is a valid yaml file.'
     if "VALIDATIONAPP_TEST" in os.environ:
         result = result + ' Value of VALIDATIONAPP_TEST environemnt variable is: ' + os.environ['VALIDATIONAPP_TEST']
