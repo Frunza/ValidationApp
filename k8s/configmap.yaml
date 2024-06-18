@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: validationapp-configmap
+  namespace: development
+data:
+  test_config: "testing configuration"

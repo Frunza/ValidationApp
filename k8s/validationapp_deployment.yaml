@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: validationapp
+  name: validationapp
+  namespace: development
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: validationapp
+  template:
+    metadata:
+      labels:
+        app: validationapp
+    spec:
+      containers:
+      - image: frunzahincu/validation_app
+        name: validationapp
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5555
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5555
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "20Mi"
+            cpu: 0.2
+          limits:
+            memory: "30Mi"
+            cpu: 0.3
+        env:
+        - name: VALIDATIONAPP_TEST
+          valueFrom:
+            configMapKeyRef:
+              name: validationapp-configmap
+              key: test_config
+        volumeMounts:
+        - name: data
+          mountPath: /tmp
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: validationapp-volume-claim
